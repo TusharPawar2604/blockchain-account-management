@@ -34,9 +34,7 @@ public final class AccountContract implements ContractInterface {
         ACCOUNT_ALREADY_EXISTS
     }
 
-    /**
-     * Create a new account on the ledger.
-     */
+
     @Transaction(intent = Transaction.TYPE.SUBMIT)
     public Account CreateAccount(
             final Context ctx,
@@ -75,9 +73,7 @@ public final class AccountContract implements ContractInterface {
         return account;
     }
 
-    /**
-     * Check whether an account exists on the ledger.
-     */
+    
     @Transaction(intent = Transaction.TYPE.EVALUATE)
     public boolean AccountExists(
             final Context ctx,
@@ -89,9 +85,7 @@ public final class AccountContract implements ContractInterface {
         return accountJSON != null && !accountJSON.isEmpty();
     }
 
-    /**
-     * Read an account from the ledger.
-     */
+   
     @Transaction(intent = Transaction.TYPE.EVALUATE)
     public Account ReadAccount(
             final Context ctx,
@@ -113,9 +107,7 @@ public final class AccountContract implements ContractInterface {
         return genson.deserialize(accountJSON, Account.class);
     }
 
-    /**
-     * Update an existing account on the ledger.
-     */
+  
     @Transaction(intent = Transaction.TYPE.SUBMIT)
     public Account UpdateAccount(
             final Context ctx,
@@ -155,9 +147,7 @@ public final class AccountContract implements ContractInterface {
         return updatedAccount;
     }
 
-   /**
- * Retrieve all accounts from the world state.
- */
+
 @Transaction(intent = Transaction.TYPE.EVALUATE)
 public String GetAllAccounts(final Context ctx) {
 
@@ -182,9 +172,7 @@ public String GetAllAccounts(final Context ctx) {
     return genson.serialize(accounts);
 }
 
-    /**
-     * Retrieve the transaction history of an account.
-     */
+  
     @Transaction(intent = Transaction.TYPE.EVALUATE)
     public String GetAccountHistory(
             final Context ctx,
