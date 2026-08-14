@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.gradleup.shadow' version '9.2.2'
+}
+
+group = 'org.hyperledger.fabric.samples'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.hyperledger.fabric-chaincode-java:fabric-chaincode-shim:2.5.+'
+    implementation 'com.owlike:genson:1.6'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+application {
+    mainClass = 'org.hyperledger.fabric.contract.ContractRouter'
+    applicationName = 'account'
+}
+
+shadowJar {
+    archiveBaseName = 'chaincode'
+    archiveVersion = ''
+    archiveClassifier = ''
+    mergeServiceFiles()
+
+    manifest {
+        attributes 'Main-Class': 'org.hyperledger.fabric.contract.ContractRouter'
+    }
+}
